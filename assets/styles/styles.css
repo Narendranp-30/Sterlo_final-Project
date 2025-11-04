@@ -68,11 +68,15 @@ body {
 /* View Sections */
 .viewSection1 {
   flex: 1;
-  padding: 3rem;
+  padding: 32px;
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 24px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .viewSection1.hidden1 {

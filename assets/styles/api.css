@@ -3,35 +3,35 @@
 .filterControls1 {
   display: flex;
   align-items: center;
-  gap: 2rem;
-  padding: 1.5rem 2rem;
+  gap: 32px;
+  padding: 24px 32px;
   background: var(--secondary-bg);
   border: 1px solid var(--border-color);
   border-radius: 16px;
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
   flex-wrap: wrap;
 }
 
 .filterGroup1 {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 12px;
 }
 
 .filterLabel1 {
-  font-size: 0.9rem;
+  font-size: 14px;
   font-weight: 500;
   color: var(--text-secondary);
   white-space: nowrap;
 }
 
 .filterSelect1 {
-  padding: 0.75rem 1rem;
+  padding: 12px 16px;
   background: var(--secondary-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   color: var(--text-primary);
-  font-size: 0.9rem;
+  font-size: 14px;
   cursor: pointer;
   transition: all 0.3s ease;
   min-width: 140px;
@@ -45,12 +45,12 @@
 }
 
 .resetBtn1 {
-  padding: 0.75rem 1.5rem;
+  padding: 12px 24px;
   background: var(--accent-primary);
   border: none;
   border-radius: 8px;
   color: var(--primary-bg);
-  font-size: 0.9rem;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -67,7 +67,7 @@
 .kpiGrid1 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  gap: 32px;
   transition: all 0.3s ease;
 }
 
@@ -81,7 +81,7 @@
   background: var(--secondary-bg);
   border: 1px solid var(--border-color);
   border-radius: 16px;
-  padding: 2rem;
+  padding: 32px;
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -117,8 +117,8 @@
 .cardHeader1 {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .cardIcon1 {
@@ -130,24 +130,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 24px;
 }
 
 .cardTitle1 {
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 14px;
   font-weight: 500;
 }
 
 .cardValue1 {
-  font-size: 2.5rem;
+  font-size: 40px;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
 }
 
 .cardChange1 {
   color: var(--accent-primary);
-  font-size: 0.85rem;
+  font-size: 14px;
   font-weight: 500;
 }

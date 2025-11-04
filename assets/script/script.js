@@ -4,7 +4,7 @@
 
 // Global Variables and Configuration
 const API_URL = 'https://mocki.io/v1/ce1c0dca-1ab4-46a4-a4a6-6790e6d201b8';
-const THEME_KEY = 'neoadmin_theme_v1';
+const THEME_KEY = 'admin_theme_v1';
 const REFRESH_INTERVAL = 30000; // 30 seconds
 
 // DOM Elements
@@ -104,15 +104,21 @@ function applyFilters() {
   if (dayFilter !== 'all' && originalData.usersRawData.length > 0) {
     const dayData = originalData.usersRawData.find(item => item.day === dayFilter);
     filteredData.users = dayData ? dayData.value : 0;
+    // Filter user distribution chart data for pie chart
+    filteredData.userDistribution = dayData ? [
+      { role: dayFilter, count: dayData.value }
+    ] : [];
   }
   
-  // Filter  Month
+  // Filter Sales by Month
   if (monthFilter !== 'all' && originalData.salesRawData.length > 0) {
     const monthData = originalData.salesRawData.find(item => item.month === monthFilter);
     filteredData.sales = monthData ? monthData.value : 0;
+    // Filter sales chart data for line chart
+    filteredData.salesData = monthData ? [monthData] : [];
   }
   
-  // Filter Date
+  // Filter Visitors by Date
   if (dateFilter !== 'all' && originalData.visitorsRawData.length > 0) {
     const dateData = originalData.visitorsRawData.find(item => item.date === dateFilter);
     filteredData.visitors = dateData ? dateData.value : 0;
@@ -121,6 +127,9 @@ function applyFilters() {
   // Update  filtered data
   updateKPICards(filteredData);
   updateCharts(filteredData);
+  
+  // Update chart titles to show filter status
+  updateChartTitles(dayFilter, monthFilter, dateFilter);
   
   // Show notification
   const filterText = filterType === 'all' ? 'All metrics' : filterType;
@@ -138,6 +147,28 @@ function getCardType(index) {
   return cardTypes[index] || 'unknown';
 }
 
+function updateChartTitles(dayFilter, monthFilter, dateFilter) {
+  // Update sales chart title
+  const salesTitle = document.querySelector('.chartContainer1 .chartTitle1');
+  if (salesTitle) {
+    if (monthFilter !== 'all') {
+      salesTitle.textContent = `Sales Trend - ${monthFilter} (Filtered)`;
+    } else {
+      salesTitle.textContent = 'Monthly Sales Trend';
+    }
+  }
+  
+  // Update user chart title
+  const userTitle = document.querySelectorAll('.chartContainer1 .chartTitle1')[1];
+  if (userTitle) {
+    if (dayFilter !== 'all') {
+      userTitle.textContent = `User Distribution - ${dayFilter} (Filtered)`;
+    } else {
+      userTitle.textContent = 'User Distribution';
+    }
+  }
+}
+
 
 function applyTimePeriodFilter(timePeriod) {
   if (!window.dashboardData) return;
@@ -145,14 +176,14 @@ function applyTimePeriodFilter(timePeriod) {
   const originalData = window.dashboardData;
   let filteredData = { ...originalData };
   
-  // Apply time-based multipliers (simulation)
-  // const multipliers = {
-  //   today: 0.03, // ~1/30 of monthly
-  //   week: 0.25,  // ~1/4 of monthly  
-  //   month: 1,    // baseline
-  //   quarter: 3,  // 3x monthly
-  //   year: 12     // 12x monthly
-  // };
+ // Apply time-based multipliers (simulation)
+  const multipliers = {
+    today: 0.03, // ~1/30 of monthly
+    week: 0.25,  // ~1/4 of monthly  
+    month: 1,    // baseline
+    quarter: 3,  // 3x monthly
+    year: 12     // 12x monthly
+  };
   
   const multiplier = multipliers[timePeriod] || 1;
   
@@ -194,11 +225,39 @@ function resetFilters() {
     card.style.display = 'block';
   });
   
-  // Reset original dats
+  // Reset original data
   if (window.dashboardData) {
-    updateKPICards(window.dashboardData);
-    updateCharts(window.dashboardData);
+    // Create a fresh copy of the original data to ensure all chart data is restored
+    const originalData = { ...window.dashboardData };
+    
+    // Ensure chart data is properly restored
+    if (originalData.salesRawData) {
+      originalData.salesData = originalData.salesRawData;
+    }
+    if (originalData.usersRawData) {
+      // Restore full user distribution for pie chart (match original format)
+      const dayMapping = {
+        'Mon': 'Monday',
+        'Tue': 'Tuesday', 
+        'Wed': 'Wednesday',
+        'Thu': 'Thursday',
+        'Fri': 'Friday',
+        'Sat': 'Saturday',
+        'Sun': 'Sunday'
+      };
+      
+      originalData.userDistribution = originalData.usersRawData.map(item => ({
+        role: dayMapping[item.day] || item.day,
+        count: item.value
+      }));
+    }
+    
+    updateKPICards(originalData);
+    updateCharts(originalData);
   }
+  
+  // Reset chart titles
+  updateChartTitles('all', 'all', 'all');
   
   showNotification('Filters reset', 'success');
 }
@@ -268,7 +327,7 @@ function downloadCSV(content, filename) {
 
 
 function initializeDashboard() {
-  console.log('Initializing NeoAdmin Dashboard...');
+  console.log('Initializing Admin Dashboard...');
   
   
   initializeTheme();

@@ -3,15 +3,22 @@
 .chartsGrid1 {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 2rem;
+  gap: 24px;
+  margin: 32px 0;
+  padding-top: 16px;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .chartContainer1 {
   background: var(--secondary-bg);
   border: 1px solid var(--border-color);
   border-radius: 16px;
-  padding: 2rem;
+  padding: 24px;
   transition: all 0.3s ease;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .chartContainer1:hover {
@@ -22,18 +29,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
 }
 
 .chartTitle1 {
-  font-size: 1.2rem;
+  font-size: 19px;
   font-weight: 600;
   color: var(--text-primary);
 }
 
 .chartActions1 {
   display: flex;
-  gap: 0.5rem;
+  gap: 8px;
 }
 
 .chartBtn1 {
@@ -53,8 +60,26 @@
 }
 
 .chartContent1 {
-  height: 300px;
+  height: 400px;
   position: relative;
+}
+
+/* Responsive chart behavior */
+@media (max-width: 1024px) {
+  .chartsGrid1 {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .chartContainer1 {
+    padding: 16px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .chartContent1 {
+    height: 450px;
+  }
 }
 
 /* Activity Section */
@@ -62,7 +87,9 @@
   background: var(--secondary-bg);
   border: 1px solid var(--border-color);
   border-radius: 16px;
-  padding: 2rem;
+  padding: 32px;
+  margin-top: 48px;
+  padding-top: 32px;
   transition: all 0.3s ease;
 }
 
@@ -70,29 +97,29 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
 }
 
 .sectionTitle1 {
-  font-size: 1.2rem;
+  font-size: 19px;
   font-weight: 600;
   color: var(--text-primary);
 }
 
 .sectionActions1 {
   display: flex;
-  gap: 1rem;
+  gap: 16px;
 }
 
 .actionBtn1 {
-  padding: 0.75rem 1.5rem;
+  padding: 12px 24px;
   background: var(--secondary-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 0.9rem;
+  font-size: 14px;
 }
 
 .actionBtn1:hover {
@@ -116,17 +143,17 @@
 .activityTable1 th {
   background: var(--secondary-bg);
   color: var(--text-primary);
-  padding: 1rem;
+  padding: 16px;
   text-align: left;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 14px;
   border-bottom: 1px solid var(--border-color);
 }
 
 .activityTable1 td {
-  padding: 1rem;
+  padding: 16px;
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 14px;
   border-bottom: 1px solid var(--border-color);
 }
 

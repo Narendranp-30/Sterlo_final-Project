@@ -107,17 +107,38 @@ function createUserChart() {
 }
 
 function updateCharts(data) {
- 
+  // Update sales chart
   if (salesChartInstance && data.salesData) {
     salesChartInstance.data.labels = data.salesData.map(item => item.month);
     salesChartInstance.data.datasets[0].data = data.salesData.map(item => item.value);
+    
+    // Add visual indicator for filtered state
+    const isFiltered = data.salesData.length === 1;
+    salesChartInstance.data.datasets[0].borderColor = isFiltered ? '#f59e0b' : '#00d4ff';
+    salesChartInstance.data.datasets[0].backgroundColor = isFiltered ? 'rgba(245, 158, 11, 0.1)' : 'rgba(0, 212, 255, 0.1)';
+    salesChartInstance.data.datasets[0].pointBackgroundColor = isFiltered ? '#f59e0b' : '#00d4ff';
+    
     salesChartInstance.update('active');
   }
   
- 
+  // Update user chart
   if (userChartInstance && data.userDistribution) {
     userChartInstance.data.labels = data.userDistribution.map(item => item.role);
     userChartInstance.data.datasets[0].data = data.userDistribution.map(item => item.count);
+    
+    // Add visual indicator for filtered state
+    const isFiltered = data.userDistribution.length === 1;
+    if (isFiltered) {
+      userChartInstance.data.datasets[0].backgroundColor = ['#f59e0b'];
+    } else {
+      userChartInstance.data.datasets[0].backgroundColor = [
+        '#00d4ff',
+        '#7c3aed',
+        '#f59e0b',
+        '#10b981'
+      ];
+    }
+    
     userChartInstance.update('active');
   }
 }

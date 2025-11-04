@@ -16,16 +16,23 @@ function initializeNavigation() {
       // Get target section
       const targetSection = navItem.dataset.section;
       
-      // Hide all sections
-      elements.viewSections.forEach(section => {
-        section.classList.add('hidden1');
-      });
-      
-      // Show target section
-      const targetElement = document.getElementById(targetSection);
-      if (targetElement) {
-        targetElement.classList.remove('hidden1');
-        targetElement.classList.add('fadeIn1');
+      // Handle different navigation targets
+      if (targetSection === 'dashboardView1') {
+        // Scroll to top for dashboard
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      } else {
+        // Scroll to specific section
+        const targetElement = document.getElementById(targetSection);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest'
+          });
+        }
       }
       
       // Update page title based on section
