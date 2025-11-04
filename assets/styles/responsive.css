@@ -1,0 +1,161 @@
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .chartsGrid1 {
+    grid-template-columns: 1fr;
+  }
+  
+  .kpiGrid1 {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .mainContainer1 {
+    flex-direction: column;
+  }
+  
+  .sidePanel1 {
+    width: 100%;
+    height: auto;
+    padding: 1rem 0;
+  }
+  
+  .navMenu1 {
+    display: flex;
+    overflow-x: auto;
+    padding: 0 1rem;
+  }
+  
+  .navItem1 {
+    min-width: 120px;
+    margin-right: 0.5rem;
+    margin-bottom: 0;
+  }
+  
+  .topNavbar1 {
+    padding: 1.5rem;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .navRight1 {
+    justify-content: center;
+  }
+  
+  .viewSection1 {
+    padding: 1.5rem;
+  }
+  
+  .kpiGrid1 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .chartContainer1 {
+    padding: 1.5rem;
+  }
+  
+  .chartContent1 {
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brandLogo1 {
+    padding: 0 1rem;
+  }
+  
+  .brandText1 {
+    font-size: 1.2rem;
+  }
+  
+  .pageTitle1 {
+    font-size: 1.5rem;
+  }
+  
+  .cardValue1 {
+    font-size: 2rem;
+  }
+  
+  .userProfile1 {
+    padding: 0.5rem 1rem;
+  }
+  
+  .userInfo1 {
+    display: none;
+  }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--secondary-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
+}
+
+/* Animation Classes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeIn1 {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.slideIn1 {
+  animation: slideIn 0.4s ease-out;
+}
+
+/* Loading States */
+.loading1 {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading1::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
