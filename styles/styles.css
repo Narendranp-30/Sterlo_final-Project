@@ -1,7 +1,7 @@
-/* Import Google Fonts */
+/* fonts  */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* CSS Variables for Theme Management */
+
 :root {
   /* Dark Theme Colors */
   --primary-bg: #0a0b0f;

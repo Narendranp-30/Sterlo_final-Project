@@ -104,31 +104,33 @@ function applyFilters() {
   if (dayFilter !== 'all' && originalData.usersRawData.length > 0) {
     const dayData = originalData.usersRawData.find(item => item.day === dayFilter);
     filteredData.users = dayData ? dayData.value : 0;
+
     // Filter user distribution chart data for pie chart
     filteredData.userDistribution = dayData ? [
       { role: dayFilter, count: dayData.value }
     ] : [];
   }
   
-  // Filter Sales by Month
+  // Filter Sales by Month wise
   if (monthFilter !== 'all' && originalData.salesRawData.length > 0) {
     const monthData = originalData.salesRawData.find(item => item.month === monthFilter);
     filteredData.sales = monthData ? monthData.value : 0;
-    // Filter sales chart data for line chart
+
+    // Filter sales chart data for line chart wise
     filteredData.salesData = monthData ? [monthData] : [];
   }
   
-  // Filter Visitors by Date
+  // Filter Visitors by Date wise
   if (dateFilter !== 'all' && originalData.visitorsRawData.length > 0) {
     const dateData = originalData.visitorsRawData.find(item => item.date === dateFilter);
     filteredData.visitors = dateData ? dateData.value : 0;
   }
   
-  // Update  filtered data
+  // Update  filtered data final data
   updateKPICards(filteredData);
   updateCharts(filteredData);
   
-  // Update chart titles to show filter status
+  //  show filter status
   updateChartTitles(dayFilter, monthFilter, dateFilter);
   
   // Show notification
@@ -227,7 +229,7 @@ function resetFilters() {
   
   // Reset original data
   if (window.dashboardData) {
-    // Create a fresh copy of the original data to ensure all chart data is restored
+    // chart data is restored
     const originalData = { ...window.dashboardData };
     
     // Ensure chart data is properly restored
@@ -235,7 +237,7 @@ function resetFilters() {
       originalData.salesData = originalData.salesRawData;
     }
     if (originalData.usersRawData) {
-      // Restore full user distribution for pie chart (match original format)
+      // Restored the full user distribution for the  pie chart section
       const dayMapping = {
         'Mon': 'Monday',
         'Tue': 'Tuesday', 
@@ -373,7 +375,7 @@ function addStatusBadgeStyles() {
 }
 
 
-// Event Listeners
+
 
 
 // DOM  fully loadedind
@@ -391,6 +393,6 @@ document.addEventListener('visibilitychange', () => {
     console.log('Dashboard hidden - pausing auto-refresh');
   } else {
     console.log('Dashboard visible - resuming auto-refresh');
-    fetchKPIData(); // Refresh data when tab becomes visible
+    fetchKPIData(); 
   }
 });

@@ -187,7 +187,48 @@ function generateMockActivities() {
       status: 'Scheduled',
       date: new Date(Date.now() - 1000 * 60 * 60),
       user: 'Admin'
-    }
+    },
+   {
+  id: 6,
+  title: 'Password changed successfully',
+  type: 'security',
+  status: 'Success',
+  date: new Date(Date.now() - 1000 * 60 * 90), // 1.5 hours ago
+  user: 'John Doe'
+},
+{
+  id: 7,
+  title: 'Email notification failed to send',
+  type: 'system',
+  status: 'Failed',
+  date: new Date(Date.now() - 1000 * 60 * 120), // 2 hours ago
+  user: 'System'
+},
+{
+  id: 8,
+  title: 'Refund issued to customer',
+  type: 'payment',
+  status: 'Success',
+  date: new Date(Date.now() - 1000 * 60 * 180), // 3 hours ago
+  user: 'Finance Team'
+},
+{
+  id: 9,
+  title: 'New user registered',
+  type: 'user',
+  status: 'Success',
+  date: new Date(Date.now() - 1000 * 60 * 240), // 4 hours ago
+  user: 'Emily Davis'
+},
+{
+  id: 10,
+  title: 'Support ticket resolved',
+  type: 'support',
+  status: 'Completed',
+  date: new Date(Date.now() - 1000 * 60 * 300), // 5 hours ago
+  user: 'Support Team'
+}
+
   ];
   
   return activities;
