@@ -16,22 +16,19 @@ function initializeNavigation() {
       // Get target section
       const targetSection = navItem.dataset.section;
       
-      // Handle different navigation targets
-      if (targetSection === 'dashboardView1') {
-        // Scroll to top for dashboard
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      } else {
-        // Scroll to specific section
-        const targetElement = document.getElementById(targetSection);
-        if (targetElement) {
-          targetElement.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-            inline: 'nearest'
-          });
+      // Hide all sections first
+      document.querySelectorAll('.viewSection1').forEach(section => {
+        section.classList.add('hidden1');
+      });
+      
+      // Show target section
+      const targetElement = document.getElementById(targetSection);
+      if (targetElement) {
+        targetElement.classList.remove('hidden1');
+        
+        // Load all activities when activity view is shown
+        if (targetSection === 'activityView1') {
+          updateAllActivityTable();
         }
       }
       

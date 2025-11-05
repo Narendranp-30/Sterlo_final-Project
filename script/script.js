@@ -279,6 +279,21 @@ function initializeActivityManagement() {
   if (elements.exportActivity) {
     elements.exportActivity.addEventListener('click', exportActivityData);
   }
+  
+  // Activity view refresh button
+  const refreshAllActivity = document.getElementById('refreshAllActivity1');
+  if (refreshAllActivity) {
+    refreshAllActivity.addEventListener('click', () => {
+      updateAllActivityTable();
+      showNotification('All activities refreshed', 'success');
+    });
+  }
+  
+  // Activity view export button
+  const exportAllActivity = document.getElementById('exportAllActivity1');
+  if (exportAllActivity) {
+    exportAllActivity.addEventListener('click', exportAllActivityData);
+  }
 }
 
 function exportActivityData() {
@@ -286,6 +301,13 @@ function exportActivityData() {
   const csvContent = convertToCSV(activities);
   downloadCSV(csvContent, 'activity-log.csv');
   showNotification('Activity data exported', 'success');
+}
+
+function exportAllActivityData() {
+  const activities = generateAllActivities();
+  const csvContent = convertToCSV(activities);
+  downloadCSV(csvContent, 'all-activities.csv');
+  showNotification('All activity data exported', 'success');
 }
 
 function convertToCSV(data) {

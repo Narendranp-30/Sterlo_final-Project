@@ -146,6 +146,37 @@ function updateActivityTable(activities) {
   });
 }
 
+function updateAllActivityTable() {
+  const allActivityTableBody = document.getElementById('allActivityTableBody1');
+  if (!allActivityTableBody) return;
+  
+  const allActivities = generateAllActivities();
+  allActivityTableBody.innerHTML = '';
+  
+  allActivities.forEach((activity, index) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${activity.id}</td>
+      <td>${activity.title}</td>
+      <td><span class="status-badge ${activity.type}">${activity.type}</span></td>
+      <td><span class="status-badge ${activity.status.toLowerCase()}">${activity.status}</span></td>
+      <td>${formatDate(activity.date)}</td>
+      <td>${activity.user}</td>
+    `;
+    
+    // animation with delay
+    row.style.opacity = '0';
+    row.style.transform = 'translateY(20px)';
+    allActivityTableBody.appendChild(row);
+    
+    setTimeout(() => {
+      row.style.transition = 'all 0.3s ease';
+      row.style.opacity = '1';
+      row.style.transform = 'translateY(0)';
+    }, index * 50);
+  });
+}
+
 function generateMockActivities() {
   const activities = [
     {
@@ -187,48 +218,94 @@ function generateMockActivities() {
       status: 'Scheduled',
       date: new Date(Date.now() - 1000 * 60 * 60),
       user: 'Admin'
-    },
-   {
-  id: 6,
-  title: 'Password changed successfully',
-  type: 'security',
-  status: 'Success',
-  date: new Date(Date.now() - 1000 * 60 * 90), // 1.5 hours ago
-  user: 'John Doe'
-},
-{
-  id: 7,
-  title: 'Email notification failed to send',
-  type: 'system',
-  status: 'Failed',
-  date: new Date(Date.now() - 1000 * 60 * 120), // 2 hours ago
-  user: 'System'
-},
-{
-  id: 8,
-  title: 'Refund issued to customer',
-  type: 'payment',
-  status: 'Success',
-  date: new Date(Date.now() - 1000 * 60 * 180), // 3 hours ago
-  user: 'Finance Team'
-},
-{
-  id: 9,
-  title: 'New user registered',
-  type: 'user',
-  status: 'Success',
-  date: new Date(Date.now() - 1000 * 60 * 240), // 4 hours ago
-  user: 'Emily Davis'
-},
-{
-  id: 10,
-  title: 'Support ticket resolved',
-  type: 'support',
-  status: 'Completed',
-  date: new Date(Date.now() - 1000 * 60 * 300), // 5 hours ago
-  user: 'Support Team'
+    }
+  ];
+  
+  return activities;
 }
 
+function generateAllActivities() {
+  const activities = [
+    {
+      id: 1,
+      title: 'User login from new device',
+      type: 'security',
+      status: 'Success',
+      date: new Date(Date.now() - 1000 * 60 * 5),
+      user: 'John Doe'
+    },
+    {
+      id: 2,
+      title: 'Database backup completed',
+      type: 'system',
+      status: 'Success',
+      date: new Date(Date.now() - 1000 * 60 * 15),
+      user: 'System'
+    },
+    {
+      id: 3,
+      title: 'New support ticket created',
+      type: 'support',
+      status: 'Pending',
+      date: new Date(Date.now() - 1000 * 60 * 30),
+      user: 'Jane Smith'
+    },
+    {
+      id: 4,
+      title: 'Payment processed successfully',
+      type: 'payment',
+      status: 'Success',
+      date: new Date(Date.now() - 1000 * 60 * 45),
+      user: 'Mike Johnson'
+    },
+    {
+      id: 5,
+      title: 'Server maintenance scheduled',
+      type: 'system',
+      status: 'Scheduled',
+      date: new Date(Date.now() - 1000 * 60 * 60),
+      user: 'Admin'
+    },
+    {
+      id: 6,
+      title: 'Password changed successfully',
+      type: 'security',
+      status: 'Success',
+      date: new Date(Date.now() - 1000 * 60 * 90),
+      user: 'John Doe'
+    },
+    {
+      id: 7,
+      title: 'Email notification failed to send',
+      type: 'system',
+      status: 'Failed',
+      date: new Date(Date.now() - 1000 * 60 * 120),
+      user: 'System'
+    },
+    {
+      id: 8,
+      title: 'Refund issued to customer',
+      type: 'payment',
+      status: 'Success',
+      date: new Date(Date.now() - 1000 * 60 * 180),
+      user: 'Finance Team'
+    },
+    {
+      id: 9,
+      title: 'New user registered',
+      type: 'user',
+      status: 'Success',
+      date: new Date(Date.now() - 1000 * 60 * 240),
+      user: 'Emily Davis'
+    },
+    {
+      id: 10,
+      title: 'Support ticket resolved',
+      type: 'support',
+      status: 'Completed',
+      date: new Date(Date.now() - 1000 * 60 * 300),
+      user: 'Support Team'
+    }
   ];
   
   return activities;

@@ -33,10 +33,7 @@
           <span class="navIcon1">📊</span>
           <span class="navLabel1">Dashboard</span>
         </button>
-        <button class="navItem1" data-section="chartsSection1">
-          <span class="navIcon1">📈</span>
-          <span class="navLabel1">Analytics</span>
-        </button>
+       
         <button class="navItem1" data-section="activityView1">
           <span class="navIcon1">📋</span>
           <span class="navLabel1">Activity</span>
@@ -177,10 +174,7 @@
           <div class="chartContainer1 large1">
             <div class="chartHeader1">
               <h3 class="chartTitle1">Monthly Sales Trend</h3>
-              <!-- <div class="chartActions1">
-                <button class="chartBtn1">📊</button>
-                <button class="chartBtn1">📈</button>
-              </div> -->
+             
             </div>
             <div class="chartContent1">
               <canvas id="salesChart1"></canvas>
@@ -198,7 +192,7 @@
         </div>
 
         <!-- Recent Activity Table -->
-        <div id="activityView1" class="activitySection1">
+        <div class="activitySection1">
           <div class="sectionHeader1">
             <h3 class="sectionTitle1">Recent Activity</h3>
             <div class="sectionActions1">
@@ -228,29 +222,38 @@
       </section>
 
     
-      <section id="analyticsView1" class="viewSection1 hidden1">
-        <div class="analyticsContent1">
-          <h2>Analytics Dashboard</h2>
-          <p>Advanced analytics coming soon...</p>
-        </div>
-      </section>
+      
 
      
       <section id="activityView1" class="viewSection1 hidden1">
-        <div class="activityContent1">
-          <h2>Activity Management</h2>
-          <p>Activity management tools coming soon...</p>
+        <div class="activitySection1">
+          <div class="sectionHeader1">
+            <h3 class="sectionTitle1">All Activities</h3>
+            <div class="sectionActions1">
+              <button class="actionBtn1" id="refreshAllActivity1">🔄</button>
+              <button class="actionBtn1" id="exportAllActivity1">📤</button>
+            </div>
+          </div>
+          
+          <div class="tableWrapper1">
+            <table class="activityTable1">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Activity</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th>User</th>
+                </tr>
+              </thead>
+              <tbody id="allActivityTableBody1">
+              
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
-
-     
-      <section id="settingsView1" class="viewSection1 hidden1">
-        <div class="settingsContent1">
-          <h2>System Settings</h2>
-          <p>System configuration coming soon...</p>
-        </div>
-      </section>
-
     </main>
   </div>
 
