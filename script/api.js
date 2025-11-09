@@ -71,7 +71,10 @@ function transformAPIData(apiData) {
       { role: 'Monday', count: usersData.data.find(d => d.day === 'Mon')?.value || 0 },
       { role: 'Tuesday', count: usersData.data.find(d => d.day === 'Tue')?.value || 0 },
       { role: 'Wednesday', count: usersData.data.find(d => d.day === 'Wed')?.value || 0 },
-      { role: 'Thursday', count: usersData.data.find(d => d.day === 'Thu')?.value || 0 }
+      { role: 'Thursday', count: usersData.data.find(d => d.day === 'Thu')?.value || 0 },
+      { role: 'Friday', count: usersData.data.find(d => d.day === 'Fri')?.value || 0 },
+      { role: 'Saturday', count: usersData.data.find(d => d.day === 'Sat')?.value || 0 },
+      { role: 'Sunday', count: usersData.data.find(d => d.day === 'Sun')?.value || 0 },
     ] : [],
     activities: generateMockActivities()
   };
@@ -218,6 +221,14 @@ function generateMockActivities() {
       status: 'Scheduled',
       date: new Date(Date.now() - 1000 * 60 * 60),
       user: 'Admin'
+    },
+    {
+      id:6,
+      title:'New user registered',
+      type:'user',
+      status:'Success',
+      date:new Date(Date.now() - 1000 * 60 * 60),
+      user:'John Doe'
     }
   ];
   

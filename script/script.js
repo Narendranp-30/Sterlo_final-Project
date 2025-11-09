@@ -392,6 +392,10 @@ function addStatusBadgeStyles() {
     .status-badge.system { background: rgba(16, 185, 129, 0.2); color: #10b981; }
     .status-badge.support { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
     .status-badge.payment { background: rgba(124, 58, 237, 0.2); color: #7c3aed; }
+     .status-badge.user { background: rgba(124, 58, 237, 0.2); color: #23f4fbff; }
+      .status-badge.failed { background: rgba(235, 87, 74, 1); color: #9a0000ff; }
+       .status-badge.completed { background: rgba(67, 241, 3, 1); color: #7c3aed; }
+
   `;
   document.head.appendChild(style);
 }

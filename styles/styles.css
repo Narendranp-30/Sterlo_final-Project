@@ -82,3 +82,14 @@ body {
 .viewSection1.hidden1 {
   display: none;
 }
+
+/* Add scrolling to Recent Activity table */
+#dashboardView1 .tableWrapper1 {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#dashboardView1 .tableWrapper1 {
+  max-height: 300px;
+  overflow-y: auto;
+}

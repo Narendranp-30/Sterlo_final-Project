@@ -129,13 +129,16 @@ function updateCharts(data) {
     // Add visual indicator for filtered state
     const isFiltered = data.userDistribution.length === 1;
     if (isFiltered) {
-      userChartInstance.data.datasets[0].backgroundColor = ['#f59e0b'];
+      userChartInstance.data.datasets[0].backgroundColor = ['#3ab62cff'];
     } else {
       userChartInstance.data.datasets[0].backgroundColor = [
         '#00d4ff',
         '#7c3aed',
         '#f59e0b',
-        '#10b981'
+        '#10b981',
+        '#b342b3ff',
+        '#d3051aff',
+        '#e8cf2aff',
       ];
     }
     
