@@ -1,47 +1,42 @@
 
 // Navigation System
-
-
 function initializeNavigation() {
-  elements.navItems.forEach(navItem => {
-    navItem.addEventListener('click', (e) => {
-      e.preventDefault();
-      
-      // Remove active class 
-      elements.navItems.forEach(item => item.classList.remove('active1'));
-      
-      // Add active class 
-      navItem.classList.add('active1');
-      
-      // Get target section
-      const targetSection = navItem.dataset.section;
-      
-      // Hide all sections first
-      document.querySelectorAll('.viewSection1').forEach(section => {
-        section.classList.add('hidden1');
-      });
-      
-      // Show target section
-      const targetElement = document.getElementById(targetSection);
-      if (targetElement) {
-        targetElement.classList.remove('hidden1');
-        
-        // Load all activities when activity view is shown
-        if (targetSection === 'activityView1') {
-          updateAllActivityTable();
-        }
-      }
-      
-      // Update page title based on section
-      updatePageTitle(navItem.textContent.trim());
-    });
+  const adminLink = document.querySelector('[data-section="dashboardView1"]');
+  const activityLink = document.querySelector('[data-section="activityView1"]');
+  const dashboardSection = document.getElementById('dashboardView1');
+  const activitySection = document.getElementById('activityView1');
+
+  adminLink.addEventListener('click', () => {
+    dashboardSection.style.display = 'block';
+    activitySection.style.display = 'none';
+
+    adminLink.classList.add('active1');
+    activityLink.classList.remove('active1');
+  });
+
+  activityLink.addEventListener('click', () => {
+    dashboardSection.style.display = 'none';
+    activitySection.style.display = 'block';
+
+    activityLink.classList.add('active1');
+    adminLink.classList.remove('active1');
+    
+    if (typeof updateAllActivityTable === 'function') {
+      updateAllActivityTable();
+    }
+
+    if (typeof updatePageTitle === 'function') {
+      updatePageTitle('Activity');
+    }
   });
 }
+
 
 function updatePageTitle(sectionName) {
   const pageTitle = document.querySelector('.pageTitle1');
   if (pageTitle) {
     pageTitle.textContent = `${sectionName} Dashboard`;
+t = `${sectionName} Dashboard`;
   }
 }
 
@@ -62,8 +57,6 @@ function toggleTheme() {
   
   applyTheme(newTheme);
   localStorage.setItem(THEME_KEY, newTheme);
-  
-  // theme button icon
   elements.themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
   
  // showNotification(`Switched to ${newTheme} theme`, 'success');

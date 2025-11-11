@@ -15,12 +15,9 @@ async function fetchKPIData() {
    
     const transformedData = transformAPIData(apiData);
     
-   
     updateKPICards(transformedData);
-    
+    //  updateAvgSalaryPerUser(transformedData);
     updateCharts(transformedData);
-    
-    
     updateActivityTable(transformedData.activities || generateMockActivities());
     
     
@@ -37,51 +34,62 @@ async function fetchKPIData() {
 
 
 function transformAPIData(apiData) {
-  if (!apiData?.kpis || !Array.isArray(apiData.kpis)) {
-    throw new Error('Invalid API response structure');
+ 
+  let usersData = null, salesData = null, visitorsData = null;
+  
+  for (let i = 0; i < apiData.kpis.length; i++) {
+    const item = apiData.kpis[i];
+    if (item.id === 1 && item.title === "Users") usersData = item;
+    if (item.id === 2 && item.title === "Sales") salesData = item;
+    if (item.id === 3 && item.title === "Visitors") visitorsData = item;
+  }
+  
+  function sumValues(data) {
+    if (!data) return 0;
+    let total = 0;
+    for (let i = 0; i < data.length; i++) {
+      total += data[i].value || 0;
+    }
+    return total;
   }
 
-  const usersData = apiData.kpis.find(item => item.id === 1 && item.title === "Users");
-  const salesData = apiData.kpis.find(item => item.id === 2 && item.title === "Sales");
-  const visitorsData = apiData.kpis.find(item => item.id === 3 && item.title === "Visitors");
-  
-  const totalUsers = usersData?.data.reduce((sum, item) => sum + item.value, 0) || 0;
-  const totalSales = salesData?.data.reduce((sum, item) => sum + item.value, 0) || 0;
-  const totalVisitors = visitorsData?.data.reduce((sum, item) => sum + item.value, 0) || 0;
-  
   return {
-    users: totalUsers,
-    sales: totalSales,
-    visitors: totalVisitors,
+    users: sumValues(usersData ? usersData.data : null),
+    sales: sumValues(salesData ? salesData.data : null),
+    visitors: sumValues(visitorsData ? visitorsData.data : null),
     
     usersRawData: usersData ? usersData.data : [],
     salesRawData: salesData ? salesData.data : [],
     visitorsRawData: visitorsData ? visitorsData.data : [],
     
-   
     usersChange: usersData ? usersData.change : '+0%',
     salesChange: salesData ? salesData.change : '+0%',
     visitorsChange: visitorsData ? visitorsData.change : '+0%',
     
-    
     salesData: salesData ? salesData.data : [],
     
-    // for pie chart 
     userDistribution: usersData ? [
-      { role: 'Monday', count: usersData.data.find(d => d.day === 'Mon')?.value || 0 },
-      { role: 'Tuesday', count: usersData.data.find(d => d.day === 'Tue')?.value || 0 },
-      { role: 'Wednesday', count: usersData.data.find(d => d.day === 'Wed')?.value || 0 },
-      { role: 'Thursday', count: usersData.data.find(d => d.day === 'Thu')?.value || 0 },
-      { role: 'Friday', count: usersData.data.find(d => d.day === 'Fri')?.value || 0 },
-      { role: 'Saturday', count: usersData.data.find(d => d.day === 'Sat')?.value || 0 },
-      { role: 'Sunday', count: usersData.data.find(d => d.day === 'Sun')?.value || 0 },
+      { role: 'Monday', count: getDayValue(usersData.data, 'Mon') },
+      { role: 'Tuesday', count: getDayValue(usersData.data, 'Tue') },
+      { role: 'Wednesday', count: getDayValue(usersData.data, 'Wed') },
+      { role: 'Thursday', count: getDayValue(usersData.data, 'Thu') },
+      { role: 'Friday', count: getDayValue(usersData.data, 'Fri') },
+      { role: 'Saturday', count: getDayValue(usersData.data, 'Sat') },
+      { role: 'Sunday', count: getDayValue(usersData.data, 'Sun') }
     ] : [],
     activities: generateMockActivities()
   };
 }
 
+function getDayValue(data, day) {
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].day === day) return data[i].value || 0;
+  }
+  return 0;
+}
+
 function updateKPICards(data) {
-  // Store  data for filtering
+ 
   window.dashboardData = data;
   
   // Animate number
@@ -90,6 +98,14 @@ function updateKPICards(data) {
  
   animateNumber(elements.visitorsCount, data.visitors);
 }
+
+
+
+// function updateAvgSalaryPerUser(data){
+//   if(!elements.avgSalaryPerUser) return;
+//   const avgSalaryPerUser = data.sales/data.users;
+//   animateNumber(elements.avgSalaryPerUser, avgSalaryPerUser, '₹');
+// }
 
 function animateNumber(element, targetValue, prefix = '') {
   if (!element) return;
@@ -116,9 +132,35 @@ function animateNumber(element, targetValue, prefix = '') {
 }
 
 
-
 // Activity Table Management
 
+function addStatusBadgeStyles() {
+  const style = document.createElement('style');
+  style.textContent = `
+    .status-badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+    
+    .status-badge.success { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+    .status-badge.pending { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+    .status-badge.error { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+    .status-badge.scheduled { background: rgba(124, 58, 237, 0.2); color: #7c3aed; }
+    
+    .status-badge.security { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+    .status-badge.system { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+    .status-badge.support { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+    .status-badge.payment { background: rgba(124, 58, 237, 0.2); color: #7c3aed; }
+     .status-badge.user { background: rgba(124, 58, 237, 0.2); color: #23f4fbff; }
+      .status-badge.failed { background: rgba(235, 87, 74, 1); color: #9a0000ff; }
+       .status-badge.completed { background: rgba(67, 241, 3, 1); color: #7c3aed; }
+
+  `;
+  document.head.appendChild(style);
+}
 
 function updateActivityTable(activities) {
   if (!elements.activityTableBody) return;
@@ -136,16 +178,8 @@ function updateActivityTable(activities) {
       <td>${activity.user}</td>
     `;
     
-    // animation with delay
-    row.style.opacity = '0';
-    row.style.transform = 'translateY(20px)';
     elements.activityTableBody.appendChild(row);
-    
-    setTimeout(() => {
-      row.style.transition = 'all 0.3s ease';
-      row.style.opacity = '1';
-      row.style.transform = 'translateY(0)';
-    }, index * 50);
+
   });
 }
 
@@ -153,7 +187,7 @@ function updateAllActivityTable() {
   const allActivityTableBody = document.getElementById('allActivityTableBody1');
   if (!allActivityTableBody) return;
   
-  const allActivities = generateAllActivities();
+  const allActivities = activities1;
   allActivityTableBody.innerHTML = '';
   
   allActivities.forEach((activity, index) => {
@@ -167,17 +201,9 @@ function updateAllActivityTable() {
       <td>${activity.user}</td>
     `;
     
-    // animation with delay
-    row.style.opacity = '0';
-    row.style.transform = 'translateY(20px)';
     allActivityTableBody.appendChild(row);
-    
-    setTimeout(() => {
-      row.style.transition = 'all 0.3s ease';
-      row.style.opacity = '1';
-      row.style.transform = 'translateY(0)';
-    }, index * 50);
-  });
+  
+  });  
 }
 
 function generateMockActivities() {
@@ -187,7 +213,7 @@ function generateMockActivities() {
       title: 'User login from new device',
       type: 'security',
       status: 'Success',
-      date: new Date(Date.now() - 1000 * 60 * 5),
+      date: new Date(Date.now()),
       user: 'John Doe'
     },
     {
@@ -195,7 +221,7 @@ function generateMockActivities() {
       title: 'Database backup completed',
       type: 'system',
       status: 'Success',
-      date: new Date(Date.now() - 1000 * 60 * 15),
+      date: new Date(Date.now()),
       user: 'System'
     },
     {
@@ -203,7 +229,7 @@ function generateMockActivities() {
       title: 'New support ticket created',
       type: 'support',
       status: 'Pending',
-      date: new Date(Date.now() - 1000 * 60 * 30),
+      date: new Date(Date.now()),
       user: 'Jane Smith'
     },
     {
@@ -211,7 +237,7 @@ function generateMockActivities() {
       title: 'Payment processed successfully',
       type: 'payment',
       status: 'Success',
-      date: new Date(Date.now() - 1000 * 60 * 45),
+      date: new Date('2025-10-01'),
       user: 'Mike Johnson'
     },
     {
@@ -219,7 +245,7 @@ function generateMockActivities() {
       title: 'Server maintenance scheduled',
       type: 'system',
       status: 'Scheduled',
-      date: new Date(Date.now() - 1000 * 60 * 60),
+      date: new Date(Date.now() ),
       user: 'Admin'
     },
     {
@@ -227,7 +253,7 @@ function generateMockActivities() {
       title:'New user registered',
       type:'user',
       status:'Success',
-      date:new Date(Date.now() - 1000 * 60 * 60),
+      date:new Date(Date.now()),
       user:'John Doe'
     }
   ];
@@ -235,14 +261,14 @@ function generateMockActivities() {
   return activities;
 }
 
-function generateAllActivities() {
-  const activities = [
+
+  const activities1 = [
     {
       id: 1,
       title: 'User login from new device',
       type: 'security',
       status: 'Success',
-      date: new Date(Date.now() - 1000 * 60 * 5),
+      date: new Date(Date.now()),
       user: 'John Doe'
     },
     {
@@ -250,7 +276,7 @@ function generateAllActivities() {
       title: 'Database backup completed',
       type: 'system',
       status: 'Success',
-      date: new Date(Date.now() - 1000 * 60 * 15),
+      date: new Date(Date.now()),
       user: 'System'
     },
     {
@@ -258,7 +284,7 @@ function generateAllActivities() {
       title: 'New support ticket created',
       type: 'support',
       status: 'Pending',
-      date: new Date(Date.now() - 1000 * 60 * 30),
+      date: new Date(Date.now()),
       user: 'Jane Smith'
     },
     {
@@ -266,7 +292,7 @@ function generateAllActivities() {
       title: 'Payment processed successfully',
       type: 'payment',
       status: 'Success',
-      date: new Date(Date.now() - 1000 * 60 * 45),
+      date: new Date(Date.now()),
       user: 'Mike Johnson'
     },
     {
@@ -274,7 +300,7 @@ function generateAllActivities() {
       title: 'Server maintenance scheduled',
       type: 'system',
       status: 'Scheduled',
-      date: new Date(Date.now() - 1000 * 60 * 60),
+      date: new Date(Date.now()),
       user: 'Admin'
     },
     {
@@ -282,7 +308,7 @@ function generateAllActivities() {
       title: 'Password changed successfully',
       type: 'security',
       status: 'Success',
-      date: new Date(Date.now() - 1000 * 60 * 90),
+      date: new Date(Date.now()),
       user: 'John Doe'
     },
     {
@@ -290,7 +316,7 @@ function generateAllActivities() {
       title: 'Email notification failed to send',
       type: 'system',
       status: 'Failed',
-      date: new Date(Date.now() - 1000 * 60 * 120),
+      date: new Date(Date.now()),
       user: 'System'
     },
     {
@@ -298,7 +324,7 @@ function generateAllActivities() {
       title: 'Refund issued to customer',
       type: 'payment',
       status: 'Success',
-      date: new Date(Date.now() - 1000 * 60 * 180),
+      date: new Date(Date.now()),
       user: 'Finance Team'
     },
     {
@@ -306,7 +332,7 @@ function generateAllActivities() {
       title: 'New user registered',
       type: 'user',
       status: 'Success',
-      date: new Date(Date.now() - 1000 * 60 * 240),
+      date: new Date(Date.now()),
       user: 'Emily Davis'
     },
     {
@@ -314,25 +340,14 @@ function generateAllActivities() {
       title: 'Support ticket resolved',
       type: 'support',
       status: 'Completed',
-      date: new Date(Date.now() - 1000 * 60 * 300),
+      date: new Date(Date.now()),
       user: 'Support Team'
     }
   ];
   
-  return activities;
-}
+
 
 function formatDate(date) {
-  const now = new Date();
-  const diff = now - new Date(date);
-  const minutes = Math.floor(diff / (1000 * 60));
-  const hours = Math.floor(diff / (1000 * 60 * 60));
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  
-  if (minutes < 1) return 'Just now';
-  if (minutes < 60) return `${minutes}m ago`;
-  if (hours < 24) return `${hours}h ago`;
-  if (days < 7) return `${days}d ago`;
-  
+
   return new Date(date).toLocaleDateString();
 }

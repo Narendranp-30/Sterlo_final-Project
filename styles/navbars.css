@@ -235,3 +235,6 @@
   box-shadow: var(--shadow-glow);
   transform: scale(1.05);
 }
+.hidden1 {
+  display: none;
+}

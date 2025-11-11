@@ -1,11 +1,7 @@
-
-// Admin Dashboard - 
-
-
 // Global Variables and Configuration
 const API_URL = 'https://mocki.io/v1/ce1c0dca-1ab4-46a4-a4a6-6790e6d201b8';
 const THEME_KEY = 'admin_theme_v1';
-const REFRESH_INTERVAL = 30000; // 30 seconds
+
 
 // DOM Elements
 const elements = {
@@ -13,6 +9,7 @@ const elements = {
   usersCount: document.getElementById('usersCount1'),
   salesAmount: document.getElementById('salesAmount1'),
   visitorsCount: document.getElementById('visitorsCount1'),
+  // avgSalaryPerUser: document.getElementById('avgSalaryPerUser'),
   
   // Navigation
   navItems: document.querySelectorAll('.navItem1'),
@@ -172,31 +169,6 @@ function updateChartTitles(dayFilter, monthFilter, dateFilter) {
 }
 
 
-function applyTimePeriodFilter(timePeriod) {
-  if (!window.dashboardData) return;
-  
-  const originalData = window.dashboardData;
-  let filteredData = { ...originalData };
-  
- // Apply time-based multipliers (simulation)
-  const multipliers = {
-    today: 0.03, // ~1/30 of monthly
-    week: 0.25,  // ~1/4 of monthly  
-    month: 1,    // baseline
-    quarter: 3,  // 3x monthly
-    year: 12     // 12x monthly
-  };
-  
-  const multiplier = multipliers[timePeriod] || 1;
-  
-  filteredData.users = Math.round(originalData.users * multiplier);
-  filteredData.sales = Math.round(originalData.sales * multiplier);
-  filteredData.visitors = Math.round(originalData.visitors * multiplier);
-  
-  // Update  filtered data
-  updateKPICards(filteredData);
-  updateCharts(filteredData);
-}
 
 function resetFilters() {
   // Reset filter controls
@@ -265,140 +237,23 @@ function resetFilters() {
 }
 
 
-// Activity Management
-
-
-function initializeActivityManagement() {
-  if (elements.refreshActivity) {
-    elements.refreshActivity.addEventListener('click', () => {
-      fetchKPIData();
-      showNotification('Activity data refreshed', 'success');
-    });
-  }
-  
-  if (elements.exportActivity) {
-    elements.exportActivity.addEventListener('click', exportActivityData);
-  }
-  
-  // Activity view refresh button
-  const refreshAllActivity = document.getElementById('refreshAllActivity1');
-  if (refreshAllActivity) {
-    refreshAllActivity.addEventListener('click', () => {
-      updateAllActivityTable();
-      showNotification('All activities refreshed', 'success');
-    });
-  }
-  
-  // Activity view export button
-  const exportAllActivity = document.getElementById('exportAllActivity1');
-  if (exportAllActivity) {
-    exportAllActivity.addEventListener('click', exportAllActivityData);
-  }
-}
-
-function exportActivityData() {
-  const activities = generateMockActivities();
-  const csvContent = convertToCSV(activities);
-  downloadCSV(csvContent, 'activity-log.csv');
-  showNotification('Activity data exported', 'success');
-}
-
-function exportAllActivityData() {
-  const activities = generateAllActivities();
-  const csvContent = convertToCSV(activities);
-  downloadCSV(csvContent, 'all-activities.csv');
-  showNotification('All activity data exported', 'success');
-}
-
-function convertToCSV(data) {
-  const headers = ['ID', 'Title', 'Type', 'Status', 'Date', 'User'];
-  const csvRows = [headers.join(',')];
-  
-  data.forEach(activity => {
-    const row = [
-      activity.id,
-      `"${activity.title}"`,
-      activity.type,
-      activity.status,
-      formatDate(activity.date),
-      `"${activity.user}"`
-    ];
-    csvRows.push(row.join(','));
-  });
-  
-  return csvRows.join('\n');
-}
-
-function downloadCSV(content, filename) {
-  const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
-  const link = document.createElement('a');
-  const url = URL.createObjectURL(blob);
-  
-  link.setAttribute('href', url);
-  link.setAttribute('download', filename);
-  link.style.visibility = 'hidden';
-  
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
-
-
-
-
 
 // Initialization
 
 
 function initializeDashboard() {
   console.log('Initializing Admin Dashboard...');
-  
-  
   initializeTheme();
   initializeNavigation();
   initializeCharts();
-  initializeActivityManagement();
   initializeFilters();
-  
-  
   fetchKPIData();
-  
-
   startAutoRefresh();
-
   addStatusBadgeStyles();
-  
   console.log('Dashboard initialized successfully!');
   showNotification('Dashboard loaded successfully', 'success');
 }
 
-function addStatusBadgeStyles() {
-  const style = document.createElement('style');
-  style.textContent = `
-    .status-badge {
-      padding: 0.25rem 0.75rem;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      text-transform: capitalize;
-    }
-    
-    .status-badge.success { background: rgba(16, 185, 129, 0.2); color: #10b981; }
-    .status-badge.pending { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
-    .status-badge.error { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
-    .status-badge.scheduled { background: rgba(124, 58, 237, 0.2); color: #7c3aed; }
-    
-    .status-badge.security { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
-    .status-badge.system { background: rgba(16, 185, 129, 0.2); color: #10b981; }
-    .status-badge.support { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
-    .status-badge.payment { background: rgba(124, 58, 237, 0.2); color: #7c3aed; }
-     .status-badge.user { background: rgba(124, 58, 237, 0.2); color: #23f4fbff; }
-      .status-badge.failed { background: rgba(235, 87, 74, 1); color: #9a0000ff; }
-       .status-badge.completed { background: rgba(67, 241, 3, 1); color: #7c3aed; }
-
-  `;
-  document.head.appendChild(style);
-}
 
 
 
@@ -413,12 +268,3 @@ window.addEventListener('resize', () => {
   if (userChartInstance) userChartInstance.resize();
 });
 
-// Handle visibility change to pause/resume auto-refresh
-document.addEventListener('visibilitychange', () => {
-  if (document.hidden) {
-    console.log('Dashboard hidden - pausing auto-refresh');
-  } else {
-    console.log('Dashboard visible - resuming auto-refresh');
-    fetchKPIData(); 
-  }
-});
