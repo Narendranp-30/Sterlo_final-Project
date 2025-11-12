@@ -31,6 +31,8 @@
 
 .activityTable1 {
   width: 100%;
+    background: var(--secondary-bg);
+ 
   /* border-collapse: collapse; */
 
 }
@@ -45,8 +47,3 @@
   padding: 16px;
   border-bottom: 1px solid var(--border-color);
 }
-
-.activityTable1 tbody tr:hover {
-  background: var(--secondary-bg);
-}
-

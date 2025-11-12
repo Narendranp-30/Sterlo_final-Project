@@ -28,7 +28,7 @@ function initializeDashboard() {
   startAutoRefresh();
   addStatusBadgeStyles();
   console.log('Dashboard initialized successfully!');
-  showNotification('Dashboard loaded successfully', 'success');
+  alert('Dashboard loaded successfully', 'success');
 }
 
 
