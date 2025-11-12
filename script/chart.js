@@ -1,8 +1,4 @@
 
-
-// Chart Management
-
-
 function initializeCharts() {
   createSalesChart();
   createUserChart();
@@ -107,37 +103,16 @@ function createUserChart() {
 }
 
 function updateCharts(data) {
-  // Update sales chart
+
   if (salesChartInstance && data.salesData) {
     salesChartInstance.data.labels = data.salesData.map(item => item.month);
     salesChartInstance.data.datasets[0].data = data.salesData.map(item => item.value);
-    
-
-    const isFiltered = data.salesData.length === 1;
-    salesChartInstance.data.datasets[0].borderColor = isFiltered ? '#f59e0b' : '#00d4ff';  
     salesChartInstance.update('active');
   }
-  
-  // Update user chart
+
   if (userChartInstance && data.userDistribution) {
     userChartInstance.data.labels = data.userDistribution.map(item => item.role);
     userChartInstance.data.datasets[0].data = data.userDistribution.map(item => item.count);
-
-    const isFiltered = data.userDistribution.length === 1;
-    if (isFiltered) {
-      userChartInstance.data.datasets[0].backgroundColor = ['#3ab62cff'];
-    } else {
-      userChartInstance.data.datasets[0].backgroundColor = [
-        '#00d4ff',
-        '#7c3aed',
-        '#f59e0b',
-        '#10b981',
-        '#b342b3ff',
-        '#d3051aff',
-        '#e8cf2aff',
-      ];
-    }
-    
     userChartInstance.update('active');
   }
 }

@@ -1,20 +1,3 @@
-// Loading States and Notifications
-
-
-function showLoadingState() {
-  const kpiCards = document.querySelectorAll('.kpiCard1');
-  kpiCards.forEach(card => {
-    card.classList.add('loading1');
-  });
-}
-
-function hideLoadingState() {
-  const kpiCards = document.querySelectorAll('.kpiCard1');
-  kpiCards.forEach(card => {
-    card.classList.remove('loading1');
-  });
-}
-
 function showNotification(message, type = 'info') {
   console.log('Creating notification:', message, type);
   const notification = document.createElement('div');
@@ -27,7 +10,6 @@ function showNotification(message, type = 'info') {
     </div>
   `;
 
-  // Style
   notification.style.position = 'fixed';
   notification.style.top = '40px';
   notification.style.right = '300px';
@@ -36,26 +18,23 @@ function showNotification(message, type = 'info') {
   notification.style.borderRadius = '12px';
   notification.style.padding = '15px 1.5rem';
   notification.style.zIndex = '1000';
-  notification.style.transform = 'translateX(100%)';
-  notification.style.transition = 'transform 0.3s ease';
 
   document.body.appendChild(notification);
 
-  // Slide in
   setTimeout(function() {
     notification.style.transform = 'translateX(0)';
   }, 100);
 
-  // Remove after 3s
   setTimeout(function() {
     notification.style.transform = 'translateX(100%)';
     setTimeout(function() {
       if (notification.parentNode) {
         notification.parentNode.removeChild(notification);
       }
-    }, 300);
+    }, 300);//3s
   }, 3000);
 }
+
 
 
 // Auto-refresh functionality

@@ -1,5 +1,3 @@
-
-/* Charts Grid */
 .chartsGrid1 {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -25,109 +23,6 @@
   box-shadow: var(--shadow-primary);
 }
 
-.chartHeader1 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 32px;
-}
-
-.chartTitle1 {
-  font-size: 19px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.chartActions1 {
-  display: flex;
-  gap: 8px;
-}
-
-.chartBtn1 {
-  width: 36px;
-  height: 36px;
-  background: var(--secondary-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.chartBtn1:hover {
-  background: var(--accent-primary);
-  color: var(--primary-bg);
-}
-
-.chartContent1 {
-  height: 400px;
-  position: relative;
-}
-
-/* Responsive chart behavior */
-@media (max-width: 1024px) {
-  .chartsGrid1 {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  
-  .chartContainer1 {
-    padding: 16px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .chartContent1 {
-    height: 450px;
-  }
-}
-
-/* Activity Section */
-.activitySection1 {
-  background: var(--secondary-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 32px;
-  margin-top: 48px;
-  padding-top: 32px;
-  transition: all 0.3s ease;
-}
-
-.sectionHeader1 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 32px;
-}
-
-.sectionTitle1 {
-  font-size: 19px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.sectionActions1 {
-  display: flex;
-  gap: 16px;
-}
-
-.actionBtn1 {
-  padding: 12px 24px;
-  background: var(--secondary-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 14px;
-}
-
-.actionBtn1:hover {
-  background: var(--accent-primary);
-  color: var(--primary-bg);
-  box-shadow: var(--shadow-glow);
-}
-
 .tableWrapper1 {
   overflow-x: auto;
   border-radius: 12px;
@@ -136,24 +31,18 @@
 
 .activityTable1 {
   width: 100%;
-  border-collapse: collapse;
-  background: var(--secondary-bg);
+  /* border-collapse: collapse; */
+
 }
 
 .activityTable1 th {
-  background: var(--secondary-bg);
-  color: var(--text-primary);
   padding: 16px;
   text-align: left;
-  font-weight: 600;
-  font-size: 14px;
   border-bottom: 1px solid var(--border-color);
 }
 
 .activityTable1 td {
   padding: 16px;
-  color: var(--text-secondary);
-  font-size: 14px;
   border-bottom: 1px solid var(--border-color);
 }
 

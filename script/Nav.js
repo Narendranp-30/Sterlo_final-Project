@@ -1,5 +1,3 @@
-
-// Navigation System
 function initializeNavigation() {
   const adminLink = document.querySelector('[data-section="dashboardView1"]');
   const activityLink = document.querySelector('[data-section="activityView1"]');
@@ -12,6 +10,9 @@ function initializeNavigation() {
 
     adminLink.classList.add('active1');
     activityLink.classList.remove('active1');
+    if (typeof updatePageTitle === 'function') {
+      updatePageTitle('Dashboad');
+    }
   });
 
   activityLink.addEventListener('click', () => {
@@ -20,7 +21,7 @@ function initializeNavigation() {
 
     activityLink.classList.add('active1');
     adminLink.classList.remove('active1');
-    
+
     if (typeof updateAllActivityTable === 'function') {
       updateAllActivityTable();
     }
@@ -31,18 +32,13 @@ function initializeNavigation() {
   });
 }
 
-
 function updatePageTitle(sectionName) {
   const pageTitle = document.querySelector('.pageTitle1');
   if (pageTitle) {
     pageTitle.textContent = `${sectionName} Dashboard`;
-t = `${sectionName} Dashboard`;
+    t = `${sectionName} Dashboard`;
   }
 }
-
-
-// Theme Management
-
 
 function initializeTheme() {
   const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
@@ -57,9 +53,8 @@ function toggleTheme() {
   
   applyTheme(newTheme);
   localStorage.setItem(THEME_KEY, newTheme);
+
   elements.themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
-  
- // showNotification(`Switched to ${newTheme} theme`, 'success');
 }
 
 function applyTheme(theme) {

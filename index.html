@@ -4,56 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard - Interactive Admin Panel</title>
-  
- 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
-  
-  
- 
   <link rel="stylesheet" href="./styles/styles.css">
   <link rel="stylesheet" href="./styles/responsive.css">
   <link rel="stylesheet" href="./styles/navbars.css">
   <link rel="stylesheet" href="./styles/charts.css">
   <link rel="stylesheet" href="./styles/api.css">
-
 </head>
 <body>
   <div class="mainContainer1">
-    
-    <!-- Sidebar Navigation -->
     <aside class="sidePanel1">
       <div class="brandLogo1">
         <div class="logoIcon1">⚡</div>
         <div class="brandText1">Admin</div>
       </div>
-      
       <nav class="navMenu1">
         <button class="navItem1 active1" data-section="dashboardView1">
           <span class="navIcon1">📊</span>
-          <span class="navLabel1">Admin</span>
+          <span class="navLabel1">Dashboard</span>
         </button>
-       
         <button class="navItem1" data-section="activityView1">
           <span class="navIcon1">📋</span>
           <span class="navLabel1">Activity</span>
         </button>
-        
       </nav>
-      
-      
     </aside>
-
-    <!-- Main Content Area -->
     <main class="contentArea1">
-      
-      <!-- Top Navigation Bar -->
       <header class="topNavbar1">
         <div class="navLeft1">
           <h1 class="pageTitle1">Admin Dashboard</h1>
           <p class="pageSubtitle1">Real-time metrics and analytics</p>
         </div>
-        
         <div class="navRight1">
           <div class="userProfile1">
             <div class="userAvatar1">👤</div>
@@ -65,70 +47,7 @@
           <button id="themeToggle1" class="themeBtn1">🌙</button>
         </div>
       </header>
-
-      <!-- Dashboard Section -->
       <section id="dashboardView1" class="viewSection1">
-        
-        <div class="filterControls1">
-          <div class="filterGroup1">
-            <label class="filterLabel1">Filter by:</label>
-            <select id="filterSelect1" class="filterSelect1">
-              <option value="all">All Metrics</option>
-              <option value="users">Users Only</option>
-              <option value="sales">Sales Only</option>
-              <option value="visitors">Visitors Only</option>
-              <option value="tickets">Tickets Only</option>
-            </select>
-          </div>
-         <div class="filterGroup1">
-            <label class="filterLabel1">Day Filter (Users):</label>
-            <select id="dayFilter1" class="filterSelect1">
-              <option value="all">All Days</option>
-              <option value="Mon">Monday</option>
-              <option value="Tue">Tuesday</option>
-              <option value="Wed">Wednesday</option>
-              <option value="Thu">Thursday</option>
-              <option value="Fri">Friday</option>
-              <option value="Sat">Saturday</option>
-              <option value="Sun">Sunday</option>
-            </select>
-          </div>
-          <div class="filterGroup1">
-            <label class="filterLabel1">Month Filter (Sales):</label>
-            <select id="monthFilter1" class="filterSelect1">
-              <option value="all">All Months</option>
-              <option value="Jan">January</option>
-              <option value="Feb">February</option>
-              <option value="Mar">March</option>
-              <option value="Apr">April</option>
-              <option value="May">May</option>
-              <option value="Jun">June</option>
-              <option value="Jul">July</option>
-              <option value="Aug">August</option>
-              <option value="Sep">September</option>
-              <option value="Oct">October</option>
-            </select>
-          </div>
-          <div class="filterGroup1">
-            <label class="filterLabel1">Date Filter (Visitors):</label>
-            <select id="dateFilter1" class="filterSelect1">
-              <option value="all">All Dates</option>
-              <option value="2025-10-01">Oct 1, 2025</option>
-              <option value="2025-10-02">Oct 2, 2025</option>
-              <option value="2025-10-03">Oct 3, 2025</option>
-              <option value="2025-10-04">Oct 4, 2025</option>
-              <option value="2025-10-05">Oct 5, 2025</option>
-              <option value="2025-10-06">Oct 6, 2025</option>
-              <option value="2025-10-07">Oct 7, 2025</option>
-              <option value="2025-10-08">Oct 8, 2025</option>
-              <option value="2025-10-09">Oct 9, 2025</option>
-              <option value="2025-10-10">Oct 10, 2025</option>
-            </select>
-          </div>
-          <button id="resetFilters1" class="resetBtn1">Reset Filters</button>
-        </div>
-        
-      
         <div class="kpiGrid1">
           <div class="kpiCard1 card1">
             <div class="cardHeader1">
@@ -138,7 +57,6 @@
             <div class="cardValue1" id="usersCount1">0</div>
             <div class="cardChange1">+12% from last month</div>
           </div>
-          
           <div class="kpiCard1 card2">
             <div class="cardHeader1">
               <div class="cardIcon1">💰</div>
@@ -147,9 +65,6 @@
             <div class="cardValue1" id="salesAmount1">₹0</div>
             <div class="cardChange1">+8% from last month</div>
           </div>
-          
-        
-          
           <div class="kpiCard1 card4">
             <div class="cardHeader1">
               <div class="cardIcon1">👁️</div>
@@ -159,19 +74,15 @@
             <div class="cardChange1">+15% from last month</div>
           </div>
         </div>
-
-   
         <div id="chartsSection1" class="chartsGrid1">
           <div class="chartContainer1 large1">
             <div class="chartHeader1">
               <h3 class="chartTitle1">Monthly Sales Trend</h3>
-             
             </div>
             <div class="chartContent1">
               <canvas id="salesChart1"></canvas>
             </div>
           </div>
-          
           <div class="chartContainer1 small1">
             <div class="chartHeader1">
               <h3 class="chartTitle1">User Distribution</h3>
@@ -181,14 +92,10 @@
             </div>
           </div>
         </div>
-
-        <!-- Recent Activity Table -->
         <div class="activitySection1">
           <div class="sectionHeader1">
             <h3 class="sectionTitle1">Recent Activity</h3>
-            
           </div>
-          
           <div class="tableWrapper1">
             <table class="activityTable1">
               <thead>
@@ -202,23 +109,16 @@
                 </tr>
               </thead>
               <tbody id="activityTableBody1">
-              
               </tbody>
             </table>
           </div>
         </div>
       </section>
-
-    
-      
-
-     
       <section id="activityView1" class="viewSection1 hidden1">
         <div class="activitySection1">
           <div class="sectionHeader1">
             <h3 class="sectionTitle1">All Activities</h3>
-             </div>
-          
+          </div>
           <div class="tableWrapper1">
             <table class="activityTable1">
               <thead>
@@ -232,7 +132,6 @@
                 </tr>
               </thead>
               <tbody id="allActivityTableBody1">
-              
               </tbody>
             </table>
           </div>
@@ -240,7 +139,6 @@
       </section>
     </main>
   </div>
-
   <script src="./script/script.js"></script>
   <script src="./script/api.js"></script>
   <script src="./script/Nav.js"></script>
