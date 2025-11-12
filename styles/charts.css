@@ -23,6 +23,24 @@
   box-shadow: var(--shadow-primary);
 }
 
+
+
+
+@media (max-width: 1024px) {
+  .chartsGrid1 {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+}
+
+@media (min-width: 1200px) {
+  .chartContent1 {
+    height: 450px;
+  }
+}
+
+
 .tableWrapper1 {
   overflow-x: auto;
   border-radius: 12px;
@@ -32,8 +50,6 @@
 .activityTable1 {
   width: 100%;
     background: var(--secondary-bg);
- 
-  /* border-collapse: collapse; */
 
 }
 
