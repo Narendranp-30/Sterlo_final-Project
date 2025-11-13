@@ -9,9 +9,9 @@ function initializeCharts() {
 }
 
 function createSalesChart() {
-  const ctx = ChartDoms.salesChart.getContext('2d');
+  const ChartContent = ChartDoms.salesChart.getContext('2d');
   
-  salesChartInstance = new Chart(ctx, {
+  salesChartInstance = new Chart(ChartContent, {
     type: 'line',
     data: {
       labels: [ ],
@@ -70,9 +70,9 @@ function createSalesChart() {
 }
 
 function createUserChart() {
-  const ctx = ChartDoms.userChart.getContext('2d');
+  const ChartContent = ChartDoms.userChart.getContext('2d');
   
-  userChartInstance = new Chart(ctx, {
+  userChartInstance = new Chart(ChartContent, {
     type: 'doughnut',
     data: {
       labels: [ ],

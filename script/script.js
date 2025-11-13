@@ -1,4 +1,4 @@
-const API_URL = 'https://mocki.io/v1/ce1c0dca-1ab4-46a4-a4a6-6790e6d201b8';
+const API_URL = 'https://narendranp-30.github.io/Sterlo_final-Project/data.json';
 const THEME_KEY = 'admin_theme_v1';
 
 const CardDoms = {
