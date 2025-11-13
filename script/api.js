@@ -64,21 +64,21 @@ function getDayValue(data, day) {
 function updateKPICards(data) {
   window.dashboardData = data;
 
-  if (elements.usersCount) {
-    elements.usersCount.textContent = data.users;
+  if (AllDoms.usersCount) {
+    AllDoms.usersCount.textContent = data.users;
   }
 
-  if (elements.salesAmount) {
-    elements.salesAmount.textContent = '₹' + data.sales;
+  if (AllDoms.salesAmount) {
+    AllDoms.salesAmount.textContent = '₹' + data.sales;
   }
 
-  if (elements.visitorsCount) {
-    elements.visitorsCount.textContent = data.visitors;
+  if (AllDoms.visitorsCount) {
+    AllDoms.visitorsCount.textContent = data.visitors;
   }
 }
 
 function updateActivityTable(activities) {
-  elements.activityTableBody.innerHTML = '';
+  AllDoms.activityTableBody.innerHTML = '';
     activities.forEach((activity, index) => {
     const row = document.createElement('tr');
     row.innerHTML = `
@@ -89,7 +89,7 @@ function updateActivityTable(activities) {
       <td>${activity.date}</td>
       <td>${activity.user}</td>
     `;
-    elements.activityTableBody.appendChild(row);
+    AllDoms.activityTableBody.appendChild(row);
   });
 }
 

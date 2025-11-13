@@ -44,7 +44,7 @@ function initializeTheme() {
   const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
   applyTheme(savedTheme);
   
-  elements.themeToggle.addEventListener('click', toggleTheme);
+  AllDoms.themeToggle.addEventListener('click', toggleTheme);
 }
 
 function toggleTheme() {
@@ -54,10 +54,10 @@ function toggleTheme() {
   applyTheme(newTheme);
   localStorage.setItem(THEME_KEY, newTheme);
 
-  elements.themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+  AllDoms.themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
 }
 
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
-  elements.themeToggle.textContent = theme === 'dark' ? '🌙' : '☀️';
+  AllDoms.themeToggle.textContent = theme === 'dark' ? '🌙' : '☀️';
 }

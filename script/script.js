@@ -1,7 +1,7 @@
 const API_URL = 'https://mocki.io/v1/ce1c0dca-1ab4-46a4-a4a6-6790e6d201b8';
 const THEME_KEY = 'admin_theme_v1';
 
-const elements = {
+const AllDoms = {
   usersCount: document.getElementById('usersCount1'),
   salesAmount: document.getElementById('salesAmount1'),
   visitorsCount: document.getElementById('visitorsCount1'),
