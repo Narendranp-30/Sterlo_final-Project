@@ -1,5 +1,4 @@
-const API_URL = 'https://narendranp-30.github.io/Sterlo_final-Project/data.json';
-const THEME_KEY = 'admin_theme_v1';
+const API = 'https://narendranp-30.github.io/Sterlo_final-Project/data.json';
 
 const CardDoms = {
   usersCount: document.getElementById('usersCount1'),
@@ -10,21 +9,16 @@ const CardDoms = {
 };
 
 function initializeDashboard() {
-  console.log('Initializing Admin Dashboard...');
+  console.log('Retriving Admin Dashboard...');
   initializeTheme();
   initializeNavigation();
   initializeCharts();
   fetchKPIData();
-  startAutoRefresh();
-  addStatusBadgeStyles();
   console.log('Dashboard initialized successfully!');
-  alert('Dashboard loaded successfully', 'success');
+  // alert('Dashboard loaded successfully', 'success');
 }
 
  document.addEventListener('DOMContentLoaded', initializeDashboard);
 
-// window.addEventListener('resize', () => {
-//   if (salesChartInstance) salesChartInstance.resize();
-//   if (userChartInstance) userChartInstance.resize();
-// });
+
 

@@ -1,20 +1,16 @@
 async function fetchKPIData() {
   try {
-   
-    const response = await fetch(API_URL);
+    const response = await fetch(API);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }    
-
     const apiData = await response.json();  
     const transformedData = transformAPIData(apiData);
     updateKPICards(transformedData);
     updateCharts(transformedData);
     updateActivityTable(transformedData.activities || generateMockActivities()); 
-    // alert('Data refreshed from API', 'success');
   } catch (error) {
     console.error('Error fetching KPI data:', error);
-
     alert('Failed to load data from API', 'error');
   }
 }
@@ -46,10 +42,7 @@ function transformAPIData(apiData) {
       { role: 'Monday', count: getDayValue(usersData.data, 'Mon') },
       { role: 'Tuesday', count: getDayValue(usersData.data, 'Tue') },
       { role: 'Wednesday', count: getDayValue(usersData.data, 'Wed') },
-      { role: 'Thursday', count: getDayValue(usersData.data, 'Thu') },
-      { role: 'Friday', count: getDayValue(usersData.data, 'Fri') },
-      { role: 'Saturday', count: getDayValue(usersData.data, 'Sat') },
-      { role: 'Sunday', count: getDayValue(usersData.data, 'Sun') }
+      
     ] : [],
     activities: generateMockActivities()
   };
@@ -66,7 +59,7 @@ function updateKPICards(data) {
   window.dashboardData = data;
 
   if (CardDoms.usersCount) {
-    CardDoms.usersCount.textContent = data.users;
+    CardDoms.usersCount.textContent = data.users.toLocaleString();
   }
 
   if (CardDoms.salesAmount) {
@@ -76,19 +69,18 @@ function updateKPICards(data) {
   if (CardDoms.visitorsCount) {
     CardDoms.visitorsCount.textContent = data.visitors;
   }
+
 }
 
 
 const TableDom ={
     activityTableBody: document.getElementById('activityTableBody1'),
-}
-
-
+}//table
 function updateActivityTable(activities) {
   TableDom.activityTableBody.innerHTML = '';
     activities.forEach((activity, index) => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
+    const TableData = document.createElement('tr');
+    TableData.innerHTML = `
       <td>${activity.id}</td>
       <td>${activity.title}</td>
       <td><span class="status-badge ${activity.type}">${activity.type}</span></td>
@@ -96,7 +88,7 @@ function updateActivityTable(activities) {
       <td>${activity.date}</td>
       <td>${activity.user}</td>
     `;
-    TableDom.activityTableBody.appendChild(row);
+    TableDom.activityTableBody.appendChild(TableData);
   });
 }
 
@@ -106,8 +98,8 @@ function updateAllActivityTable() {
   allActivityTableBody.innerHTML = '';
   
   allActivities.forEach((activity, index) => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
+    const TableData = document.createElement('tr');
+    TableData.innerHTML = `
       <td>${activity.id}</td>
       <td>${activity.title}</td>
       <td><span class="status-badge ${activity.type}">${activity.type}</span></td>
@@ -115,7 +107,7 @@ function updateAllActivityTable() {
       <td>${activity.date}</td>
       <td>${activity.user}</td>
     `;    
-    allActivityTableBody.appendChild(row);
+    allActivityTableBody.appendChild(TableData);
   });  
 }
 

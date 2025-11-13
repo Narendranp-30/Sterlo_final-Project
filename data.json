@@ -32,9 +32,7 @@
                     "day": "Sun",
                     "value": 1240
                 }
-            ],
-            "change": "+5%",
-            "icon": "users"
+            ]
         },
         {
             "id": 2,
@@ -80,9 +78,7 @@
                     "month": "Oct",
                     "value": 75200
                 }
-            ],
-            "change": "+12%",
-            "icon": "dollar-sign"
+            ]
         },
         {
             "id": 3,
@@ -148,9 +144,7 @@
                     "date": "2025-10-15",
                     "value": 9840
                 }
-            ],
-            "change": "-3%",
-            "icon": "eye"
+            ]
         }
     ]
 }

@@ -47,7 +47,7 @@ const ThemesDom ={
 
 
 function initializeTheme() {
-  const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
+  const savedTheme = localStorage.getItem('admin_theme') || 'dark';
   applyTheme(savedTheme);
   
   ThemesDom.themeToggle.addEventListener('click', toggleTheme);
@@ -58,7 +58,7 @@ function toggleTheme() {
   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
   
   applyTheme(newTheme);
-  localStorage.setItem(THEME_KEY, newTheme);
+  localStorage.setItem('admin_theme', newTheme);
 
   ThemesDom.themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
 }
