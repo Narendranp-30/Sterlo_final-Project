@@ -1,0 +1,156 @@
+{
+    "kpis": [
+        {
+            "id": 1,
+            "title": "Users",
+            "data": [
+                {
+                    "day": "Mon",
+                    "value": 1050
+                },
+                {
+                    "day": "Tue",
+                    "value": 1200
+                },
+                {
+                    "day": "Wed",
+                    "value": 1130
+                },
+                {
+                    "day": "Thu",
+                    "value": 1265
+                },
+                {
+                    "day": "Fri",
+                    "value": 1310
+                },
+                {
+                    "day": "Sat",
+                    "value": 1195
+                },
+                {
+                    "day": "Sun",
+                    "value": 1240
+                }
+            ],
+            "change": "+5%",
+            "icon": "users"
+        },
+        {
+            "id": 2,
+            "title": "Sales",
+            "data": [
+                {
+                    "month": "Jan",
+                    "value": 54000
+                },
+                {
+                    "month": "Feb",
+                    "value": 58300
+                },
+                {
+                    "month": "Mar",
+                    "value": 61000
+                },
+                {
+                    "month": "Apr",
+                    "value": 64000
+                },
+                {
+                    "month": "May",
+                    "value": 70500
+                },
+                {
+                    "month": "Jun",
+                    "value": 68900
+                },
+                {
+                    "month": "Jul",
+                    "value": 71200
+                },
+                {
+                    "month": "Aug",
+                    "value": 74500
+                },
+                {
+                    "month": "Sep",
+                    "value": 75800
+                },
+                {
+                    "month": "Oct",
+                    "value": 75200
+                }
+            ],
+            "change": "+12%",
+            "icon": "dollar-sign"
+        },
+        {
+            "id": 3,
+            "title": "Visitors",
+            "data": [
+                {
+                    "date": "2025-10-01",
+                    "value": 8200
+                },
+                {
+                    "date": "2025-10-02",
+                    "value": 8450
+                },
+                {
+                    "date": "2025-10-03",
+                    "value": 8720
+                },
+                {
+                    "date": "2025-10-04",
+                    "value": 8900
+                },
+                {
+                    "date": "2025-10-05",
+                    "value": 8760
+                },
+                {
+                    "date": "2025-10-06",
+                    "value": 8610
+                },
+                {
+                    "date": "2025-10-07",
+                    "value": 8490
+                },
+                {
+                    "date": "2025-10-08",
+                    "value": 8725
+                },
+                {
+                    "date": "2025-10-09",
+                    "value": 8980
+                },
+                {
+                    "date": "2025-10-10",
+                    "value": 9100
+                },
+                {
+                    "date": "2025-10-11",
+                    "value": 9240
+                },
+                {
+                    "date": "2025-10-12",
+                    "value": 9400
+                },
+                {
+                    "date": "2025-10-13",
+                    "value": 9560
+                },
+                {
+                    "date": "2025-10-14",
+                    "value": 9700
+                },
+                {
+                    "date": "2025-10-15",
+                    "value": 9840
+                }
+            ],
+            "change": "-3%",
+            "icon": "eye"
+        }
+    ]
+}
