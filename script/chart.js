@@ -1,7 +1,7 @@
-
-
-// Chart Management
-
+const ChartDoms ={
+  salesChart: document.getElementById('salesChart1'),
+  userChart: document.getElementById('userChart1'),
+}
 
 function initializeCharts() {
   createSalesChart();
@@ -9,9 +9,9 @@ function initializeCharts() {
 }
 
 function createSalesChart() {
-  const ctx = elements.salesChart.getContext('2d');
+  const ChartContent = ChartDoms.salesChart.getContext('2d');
   
-  salesChartInstance = new Chart(ctx, {
+  salesChartInstance = new Chart(ChartContent, {
     type: 'line',
     data: {
       labels: [ ],
@@ -70,9 +70,9 @@ function createSalesChart() {
 }
 
 function createUserChart() {
-  const ctx = elements.userChart.getContext('2d');
+  const ChartContent = ChartDoms.userChart.getContext('2d');
   
-  userChartInstance = new Chart(ctx, {
+  userChartInstance = new Chart(ChartContent, {
     type: 'doughnut',
     data: {
       labels: [ ],
@@ -107,41 +107,16 @@ function createUserChart() {
 }
 
 function updateCharts(data) {
-  // Update sales chart
+
   if (salesChartInstance && data.salesData) {
     salesChartInstance.data.labels = data.salesData.map(item => item.month);
     salesChartInstance.data.datasets[0].data = data.salesData.map(item => item.value);
-    
-    // Add visual indicator for filtered state
-    const isFiltered = data.salesData.length === 1;
-    salesChartInstance.data.datasets[0].borderColor = isFiltered ? '#f59e0b' : '#00d4ff';
-    salesChartInstance.data.datasets[0].backgroundColor = isFiltered ? 'rgba(245, 158, 11, 0.1)' : 'rgba(0, 212, 255, 0.1)';
-    salesChartInstance.data.datasets[0].pointBackgroundColor = isFiltered ? '#f59e0b' : '#00d4ff';
-    
     salesChartInstance.update('active');
   }
-  
-  // Update user chart
+
   if (userChartInstance && data.userDistribution) {
     userChartInstance.data.labels = data.userDistribution.map(item => item.role);
     userChartInstance.data.datasets[0].data = data.userDistribution.map(item => item.count);
-    
-    // Add visual indicator for filtered state
-    const isFiltered = data.userDistribution.length === 1;
-    if (isFiltered) {
-      userChartInstance.data.datasets[0].backgroundColor = ['#3ab62cff'];
-    } else {
-      userChartInstance.data.datasets[0].backgroundColor = [
-        '#00d4ff',
-        '#7c3aed',
-        '#f59e0b',
-        '#10b981',
-        '#b342b3ff',
-        '#d3051aff',
-        '#e8cf2aff',
-      ];
-    }
-    
     userChartInstance.update('active');
   }
 }
