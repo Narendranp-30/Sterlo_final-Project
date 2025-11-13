@@ -40,11 +40,17 @@ function updatePageTitle(sectionName) {
   }
 }
 
+
+const ThemesDom ={
+  themeToggle: document.getElementById('themeToggle1'),
+}
+
+
 function initializeTheme() {
   const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
   applyTheme(savedTheme);
   
-  AllDoms.themeToggle.addEventListener('click', toggleTheme);
+  ThemesDom.themeToggle.addEventListener('click', toggleTheme);
 }
 
 function toggleTheme() {
@@ -54,10 +60,10 @@ function toggleTheme() {
   applyTheme(newTheme);
   localStorage.setItem(THEME_KEY, newTheme);
 
-  AllDoms.themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+  ThemesDom.themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
 }
 
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
-  AllDoms.themeToggle.textContent = theme === 'dark' ? '🌙' : '☀️';
+  ThemesDom.themeToggle.textContent = theme === 'dark' ? '🌙' : '☀️';
 }

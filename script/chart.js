@@ -1,3 +1,7 @@
+const ChartDoms ={
+  salesChart: document.getElementById('salesChart1'),
+  userChart: document.getElementById('userChart1'),
+}
 
 function initializeCharts() {
   createSalesChart();
@@ -5,7 +9,7 @@ function initializeCharts() {
 }
 
 function createSalesChart() {
-  const ctx = AllDoms.salesChart.getContext('2d');
+  const ctx = ChartDoms.salesChart.getContext('2d');
   
   salesChartInstance = new Chart(ctx, {
     type: 'line',
@@ -66,7 +70,7 @@ function createSalesChart() {
 }
 
 function createUserChart() {
-  const ctx = AllDoms.userChart.getContext('2d');
+  const ctx = ChartDoms.userChart.getContext('2d');
   
   userChartInstance = new Chart(ctx, {
     type: 'doughnut',

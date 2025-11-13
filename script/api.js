@@ -5,6 +5,7 @@ async function fetchKPIData() {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }    
+
     const apiData = await response.json();  
     const transformedData = transformAPIData(apiData);
     updateKPICards(transformedData);
@@ -64,21 +65,27 @@ function getDayValue(data, day) {
 function updateKPICards(data) {
   window.dashboardData = data;
 
-  if (AllDoms.usersCount) {
-    AllDoms.usersCount.textContent = data.users;
+  if (CardDoms.usersCount) {
+    CardDoms.usersCount.textContent = data.users;
   }
 
-  if (AllDoms.salesAmount) {
-    AllDoms.salesAmount.textContent = '₹' + data.sales;
+  if (CardDoms.salesAmount) {
+    CardDoms.salesAmount.textContent = '₹' + data.sales;
   }
 
-  if (AllDoms.visitorsCount) {
-    AllDoms.visitorsCount.textContent = data.visitors;
+  if (CardDoms.visitorsCount) {
+    CardDoms.visitorsCount.textContent = data.visitors;
   }
 }
 
+
+const TableDom ={
+    activityTableBody: document.getElementById('activityTableBody1'),
+}
+
+
 function updateActivityTable(activities) {
-  AllDoms.activityTableBody.innerHTML = '';
+  TableDom.activityTableBody.innerHTML = '';
     activities.forEach((activity, index) => {
     const row = document.createElement('tr');
     row.innerHTML = `
@@ -89,7 +96,7 @@ function updateActivityTable(activities) {
       <td>${activity.date}</td>
       <td>${activity.user}</td>
     `;
-    AllDoms.activityTableBody.appendChild(row);
+    TableDom.activityTableBody.appendChild(row);
   });
 }
 
