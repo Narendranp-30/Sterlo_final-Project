@@ -1,26 +1,26 @@
 function initializeNavigation() {
-  const adminLink = document.querySelector('[data-section="dashboardView1"]');
-  const activityLink = document.querySelector('[data-section="activityView1"]');
-  const dashboardSection = document.getElementById('dashboardView1');
-  const activitySection = document.getElementById('activityView1');
+  const adminClick = document.querySelector('[data-section="dashboardView1"]');
+  const activityClick = document.querySelector('[data-section="activityView1"]');
+  const dashboardTab = document.getElementById('dashboardView1');
+  const activityTab = document.getElementById('activityView1');
 
-  adminLink.addEventListener('click', () => {
-    dashboardSection.style.display = 'block';
-    activitySection.style.display = 'none';
+  adminClick.addEventListener('click', () => {
+    dashboardTab.style.display = 'block';
+    activityTab.style.display = 'none';
 
-    adminLink.classList.add('active1');
-    activityLink.classList.remove('active1');
+    adminClick.classList.add('active1');
+    activityClick.classList.remove('active1');
     if (typeof updatePageTitle === 'function') {
       updatePageTitle('Dashboad');
     }
   });
 
-  activityLink.addEventListener('click', () => {
-    dashboardSection.style.display = 'none';
-    activitySection.style.display = 'block';
+  activityClick.addEventListener('click', () => {
+    dashboardTab.style.display = 'none';
+    activityTab.style.display = 'block';
 
-    activityLink.classList.add('active1');
-    adminLink.classList.remove('active1');
+    activityClick.classList.add('active1');
+    adminClick.classList.remove('active1');
 
     if (typeof updateAllActivityTable === 'function') {
       updateAllActivityTable();
