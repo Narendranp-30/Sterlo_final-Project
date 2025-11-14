@@ -11,7 +11,7 @@ function fetchKPIData() {
       console.log("Transformed Data:", transformedData);
       updateKPICards(transformedData);
       updateCharts(transformedData);
-      updateActivityTable(transformedData.activities || generateActivities());
+      updateTable(transformedData.activities || generateActivities());
     })
     .catch(err => {
       console.error("Error:", err);
@@ -64,7 +64,7 @@ function updateKPICards(data) {
   window.dashboardData = data;
 
   if (CardDoms.usersCount) {
-    CardDoms.usersCount.textContent = data.users;
+    CardDoms.usersCount.textContent = (data.users).toFixed(2);
   }
 
   if (CardDoms.salesAmount) {
@@ -79,10 +79,10 @@ function updateKPICards(data) {
 
 
 const TableDom ={
-    activityTableBody: document.getElementById('activityTableBody1'),
+    TableBody: document.getElementById('activityTableBody1'),
 }
-function updateActivityTable(activities) {
-  TableDom.activityTableBody.innerHTML = '';
+function updateTable(activities) {
+  TableDom.TableBody.innerHTML = '';
     activities.forEach((activity, index) => {
     const TableData = document.createElement('tr');
     TableData.innerHTML = `
@@ -93,14 +93,14 @@ function updateActivityTable(activities) {
       <td>${activity.date}</td>
       <td>${activity.user}</td>
     `;
-    TableDom.activityTableBody.appendChild(TableData);
+    TableDom.TableBody.appendChild(TableData);
   });
 }
 
-function updateAllActivityTable() {
-  const allActivityTableBody = document.getElementById('allActivityTableBody1');
+function updateAllTable() {
+  const allTableBody = document.getElementById('allActivityTableBody1');
   const allActivities = activities1;
-  allActivityTableBody.innerHTML = '';
+  allTableBody.innerHTML = '';
   
   allActivities.forEach((activity, index) => {
     const TableData = document.createElement('tr');
@@ -112,7 +112,7 @@ function updateAllActivityTable() {
       <td>${activity.date}</td>
       <td>${activity.user}</td>
     `;    
-    allActivityTableBody.appendChild(TableData);
+    allTableBody.appendChild(TableData);
   });  
   
 }

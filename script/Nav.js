@@ -22,8 +22,8 @@ function initializeNavigation() {
     activityClick.classList.add('active1');
     adminClick.classList.remove('active1');
 
-    if (typeof updateAllActivityTable === 'function') {
-      updateAllActivityTable();
+    if (typeof updateAllTable === 'function') {
+      updateAllTable();
     }
 
     if (typeof updatePageTitle === 'function') {

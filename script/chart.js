@@ -4,11 +4,11 @@ const ChartDoms ={
 }
 
 function initializeCharts() {
-  createSalesChart();
-  createUserChart();
+  SalesChart();
+  UserChart();
 }
 
-function createSalesChart() {
+function SalesChart() {
   const ChartContent = ChartDoms.salesChart.getContext('2d');
   
   salesChartInstance = new Chart(ChartContent, {
@@ -69,7 +69,7 @@ function createSalesChart() {
   });
 }
 
-function createUserChart() {
+function UserChart() {
   const ChartContent = ChartDoms.userChart.getContext('2d');
   
   userChartInstance = new Chart(ChartContent, {
