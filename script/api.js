@@ -88,8 +88,8 @@ function updateTable(activities) {
     TableData.innerHTML = `
       <td>${activity.id}</td>
       <td>${activity.title}</td>
-      <td><span class="status-badge ${activity.type}">${activity.type}</span></td>
-      <td><span class="status-badge ${activity.status.toLowerCase()}">${activity.status}</span></td>
+      <td>${activity.type}</td>
+      <td>${activity.status}</td>
       <td>${activity.date}</td>
       <td>${activity.user}</td>
     `;
@@ -107,8 +107,8 @@ function updateAllTable() {
     TableData.innerHTML = `
       <td>${activity.id}</td>
       <td>${activity.title}</td>
-      <td><span class="status-badge ${activity.type}">${activity.type}</span></td>
-      <td><span class="status-badge ${activity.status.toLowerCase()}">${activity.status}</span></td>
+      <td>${activity.type}</td>
+      <td>${activity.status}</td>
       <td>${activity.date}</td>
       <td>${activity.user}</td>
     `;    
