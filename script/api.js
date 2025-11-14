@@ -59,7 +59,7 @@ function updateKPICards(data) {
   window.dashboardData = data;
 
   if (CardDoms.usersCount) {
-    CardDoms.usersCount.textContent = data.users.toLocaleString();
+    CardDoms.usersCount.textContent = data.users;
   }
 
   if (CardDoms.salesAmount) {
@@ -75,7 +75,7 @@ function updateKPICards(data) {
 
 const TableDom ={
     activityTableBody: document.getElementById('activityTableBody1'),
-}//table
+}
 function updateActivityTable(activities) {
   TableDom.activityTableBody.innerHTML = '';
     activities.forEach((activity, index) => {

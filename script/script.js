@@ -15,7 +15,6 @@ function initializeDashboard() {
   initializeCharts();
   fetchKPIData();
   console.log('Dashboard initialized successfully!');
-  // alert('Dashboard loaded successfully', 'success');
 }
 
  document.addEventListener('DOMContentLoaded', initializeDashboard);

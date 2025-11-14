@@ -41,29 +41,20 @@ function updatePageTitle(sectionName) {
 }
 
 
-const ThemesDom ={
-  themeToggle: document.getElementById('themeToggle1'),
-}
-
+const themeBtn = document.getElementById("themeToggle1");
 
 function initializeTheme() {
-  const savedTheme = localStorage.getItem('admin_theme') || 'dark';
-  applyTheme(savedTheme);
-  
-  ThemesDom.themeToggle.addEventListener('click', toggleTheme);
+  const saved = localStorage.getItem("admin_theme") || "dark";
+  setTheme(saved);
+
+  themeBtn.addEventListener("click", () => {
+    const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    localStorage.setItem("admin_theme", next);
+  });
 }
 
-function toggleTheme() {
-  const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  
-  applyTheme(newTheme);
-  localStorage.setItem('admin_theme', newTheme);
-
-  ThemesDom.themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
-}
-
-function applyTheme(theme) {
-  document.documentElement.setAttribute('data-theme', theme);
-  ThemesDom.themeToggle.textContent = theme === 'dark' ? '🌙' : '☀️';
+function setTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  themeBtn.textContent = theme === "dark" ? "🌙" : "☀️";
 }
