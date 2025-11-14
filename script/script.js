@@ -1,5 +1,3 @@
-const API = 'https://narendranp-30.github.io/Sterlo_final-Project/data.json';
-
 const CardDoms = {
   usersCount: document.getElementById('usersCount1'),
   salesAmount: document.getElementById('salesAmount1'),

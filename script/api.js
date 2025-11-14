@@ -1,19 +1,24 @@
-async function fetchKPIData() {
-  try {
-    const response = await fetch(API);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }    
-    const apiData = await response.json();  
-    const transformedData = transformAPIData(apiData);
-    updateKPICards(transformedData);
-    updateCharts(transformedData);
-    updateActivityTable(transformedData.activities || generateMockActivities()); 
-  } catch (error) {
-    console.error('Error fetching KPI data:', error);
-    alert('Failed to load data from API', 'error');
-  }
+const API = 'https://narendranp-30.github.io/Sterlo_final-Project/data.json';
+
+function fetchKPIData() {
+  fetch(API)
+    .then(res => {
+      return res.json();
+    })
+    .then(apiData => {
+      const transformedData = transformAPIData(apiData);
+      console.log("API Data:", apiData);
+      console.log("Transformed Data:", transformedData);
+      updateKPICards(transformedData);
+      updateCharts(transformedData);
+      updateActivityTable(transformedData.activities || generateActivities());
+    })
+    .catch(err => {
+      console.error("Error:", err);
+      alert("Failed to load data from API", "error");
+    })
 }
+
 
 function transformAPIData(apiData) {
   let usersData = null, salesData = null, visitorsData = null;
@@ -44,7 +49,7 @@ function transformAPIData(apiData) {
       { role: 'Wednesday', count: getDayValue(usersData.data, 'Wed') },
       
     ] : [],
-    activities: generateMockActivities()
+    activities: generateActivities()
   };
 }
 
@@ -109,9 +114,10 @@ function updateAllActivityTable() {
     `;    
     allActivityTableBody.appendChild(TableData);
   });  
+  
 }
 
-function generateMockActivities() {
+function generateActivities() {
   const activities = [
     {
       id: 1,title: 'User login from new device',
