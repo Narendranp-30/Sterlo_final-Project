@@ -17,7 +17,7 @@
 
 
 .kpiCard1:hover {
-  transform: translateY(-8px);
+  
   box-shadow: var(--shadow-primary), var(--shadow-glow);
 }
 

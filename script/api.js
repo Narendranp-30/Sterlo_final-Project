@@ -64,11 +64,11 @@ function updateKPICards(data) {
   window.dashboardData = data;
 
   if (CardDoms.usersCount) {
-    CardDoms.usersCount.textContent = (data.users).toFixed(2);
+    CardDoms.usersCount.textContent = data.users;
   }
 
   if (CardDoms.salesAmount) {
-    CardDoms.salesAmount.textContent = '₹' + data.sales;
+    CardDoms.salesAmount.textContent = '₹' + (data.sales).toFixed(2);
   }
 
   if (CardDoms.visitorsCount) {
